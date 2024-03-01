@@ -9,4 +9,6 @@ for (const length of lengths) {
     const formatted = new Intl.NumberFormat('en-US').format(length).replace(/,/g, '-');
     fs.writeFileSync(`${formatted}-json-integers.json`, JSON.stringify({values}, undefined, 2));
     fs.writeFileSync(`${formatted}-compact-json-integers.json`, JSON.stringify({values}, undefined, 0));
+    const doubleValues = values.map((value) => value + 0.003);
+    fs.writeFileSync(`${formatted}-compact-json-doubles.json`, JSON.stringify({doubleValues}, undefined, 0));
 }
