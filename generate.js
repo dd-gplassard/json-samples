@@ -11,4 +11,13 @@ for (const length of lengths) {
     fs.writeFileSync(`${formatted}-compact-json-integers.json`, JSON.stringify({values}, undefined, 0));
     const doubleValues = values.map((value) => value + 0.003);
     fs.writeFileSync(`${formatted}-compact-json-doubles.json`, JSON.stringify({doubleValues}, undefined, 0));
+
+    const chunked = [];
+    const chunkSize = 2;
+    for (let i = 0; i < values.length; i += chunkSize) {
+        const chunk = values.slice(i, i + chunkSize);
+        chunked.push(chunk);
+    }
+    fs.writeFileSync(`${formatted}-compact-json-chunked.json`, JSON.stringify({chunked}, undefined, 0));
 }
+
