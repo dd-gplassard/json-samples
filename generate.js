@@ -48,3 +48,20 @@ function nestedArray() {
 }
 
 fs.writeFileSync(`nested-compact-json-chunked.json`, JSON.stringify({nested: nestedArray()}, undefined, 0));
+
+
+function nestedKeys() {
+    const root = {};
+    let current = root;
+    const letters = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz';
+    for (const l of letters) {
+        current[l] = {
+            data: Array.from(Array(3000).keys())
+                .map((idx) => 10_000 + (idx % 90_000))
+        };
+        current = current[l];
+    }
+    return root;
+}
+
+fs.writeFileSync(`nested-keys-compact-json.json`, JSON.stringify({nestedKeys: nestedKeys()}, undefined, 0));
