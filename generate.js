@@ -24,19 +24,27 @@ for (const length of lengths) {
 
 
 function nestedArray() {
-    const topArray = [];
-    for (const i of Array(100).keys()) {
-        const middleArray = [];
-        for (const j of Array(100).keys()) {
-            const bottomArray = [];
-            for (const k of Array(270).keys()) {
-                bottomArray.push(k);
+    const array1 = [];
+    for (const i of Array(10).keys()) {
+        const array2 = [];
+        for (const j of Array(10).keys()) {
+            const array3 = [];
+            for (const k of Array(100).keys()) {
+                const array4 = [];
+                for (const l of Array(10).keys()) {
+                    const array5 = [];
+                    for (const l of Array(30).keys()) {
+                        array5.push(k);
+                    }
+                    array4.push(array5);
+                }
+                array3.push(array4);
             }
-            middleArray.push(bottomArray);
+            array2.push(array3);
         }
-        topArray.push(middleArray);
+        array1.push(array2);
     }
-    return topArray;
+    return array1;
 }
 
 fs.writeFileSync(`nested-compact-json-chunked.json`, JSON.stringify({nested: nestedArray()}, undefined, 0));
