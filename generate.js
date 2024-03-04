@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+
 const lengths = [25_000, 100_000, 250_000, 900_000,1_000_000, 1_700_000, 2_500_000];
 for (const length of lengths) {
     const values = Array.from(Array(length).keys())
@@ -21,3 +22,21 @@ for (const length of lengths) {
     fs.writeFileSync(`${formatted}-compact-json-chunked.json`, JSON.stringify({chunked}, undefined, 0));
 }
 
+
+function nestedArray() {
+    const topArray = [];
+    for (const i of Array(100).keys()) {
+        const middleArray = [];
+        for (const j of Array(100).keys()) {
+            const bottomArray = [];
+            for (const k of Array(270).keys()) {
+                bottomArray.push(k);
+            }
+            middleArray.push(bottomArray);
+        }
+        topArray.push(middleArray);
+    }
+    return topArray;
+}
+
+fs.writeFileSync(`nested-compact-json-chunked.json`, JSON.stringify({nested: nestedArray()}, undefined, 0));
